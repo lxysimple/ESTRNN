@@ -6,6 +6,7 @@ from thop import profile
 from .arches import conv1x1, conv3x3, conv5x5, actFunc
 
 
+# RDB 模块内部的子模块
 # Dense layer
 class dense_layer(nn.Module):
     def __init__(self, in_channels, growthRate, activation='relu'):
