@@ -61,7 +61,7 @@ class RDNet(nn.Module):
         out = self.conv3x3(out)
         return out
 
-
+# RDB cell 内部左边部分
 # DownSampling module
 class RDB_DS(nn.Module):
     def __init__(self, in_channels, growthRate, num_layer, activation='relu'):
