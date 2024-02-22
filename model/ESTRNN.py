@@ -228,7 +228,7 @@ class Model(nn.Module):
         for i in range(frames):
             h, s = self.cell(x[:, i, :, :, :], s)
             hs.append(h)
-        for i in range(self.num_fb + self.num_ff):
+        for i in range(self.num_fb + self.num_ff): # 这里在后面多加几人造帧，保证frames输入=输出
             hs.append(torch.randn(*h.shape).to(self.device))
         for i in range(self.num_fb, frames + self.num_fb):
             out = self.fusion(hs[i - self.num_fb:i + self.num_ff + 1])
@@ -243,7 +243,7 @@ def feed(model, iter_samples):
     outputs = model(inputs)
     return outputs
 
-
+# 返回每个序列步长的平均计算代价和模型的总参数数量，这是通过将总的浮点操作数 (FLOPs) 除以序列长度得到的
 def cost_profile(model, H, W, seq_length):
     x = torch.randn(1, seq_length, 3, H, W).cuda()
     profile_flag = True
