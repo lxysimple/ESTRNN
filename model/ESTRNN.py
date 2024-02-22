@@ -104,20 +104,25 @@ class GSA(nn.Module):
 
     def forward(self, hs):
         # hs: [(n=4,c=80,h=64,w=64), ..., (n,c,h,w)]
-        self.nframes = len(hs)
+        self.nframes = len(hs) # 默认是5吧
         f_ref = hs[self.center]
         cor_l = []
         for i in range(self.nframes):
             if i != self.center:
                 cor = torch.cat([f_ref, hs[i]], dim=1)
-                w = F.adaptive_avg_pool2d(cor, (1, 1)).squeeze()  # (n,c) : (4, 160)
+
+                # 进入上边的支线部分
+                w = F.adaptive_avg_pool2d(cor, (1, 1)).squeeze()  # (n,c) : (4,160)
                 if len(w.shape) == 1:
                     w = w.unsqueeze(dim=0)
                 w = self.F_f(w)
                 w = w.reshape(*w.shape, 1, 1)
+
+                # 回归主线
                 cor = self.F_p(cor)
                 cor = self.condense(w * cor)
                 cor_l.append(cor)
+
         cor_l.append(f_ref)
         out = self.fusion(torch.cat(cor_l, dim=1))
 
@@ -145,11 +150,14 @@ class RDBCell(nn.Module):
         )
 
     def forward(self, x, s_last):
+        # ft主线
         out = self.F_B0(x)
         out = self.F_B1(out)
         out = self.F_B2(out)
         out = torch.cat([out, s_last], dim=1)
         out = self.F_R(out)
+
+        # 进入ht支线
         s = self.F_h(out)
 
         return out, s
@@ -182,10 +190,10 @@ class Model(nn.Module):
     def __init__(self, para):
         super(Model, self).__init__()
         self.para = para
-        self.n_feats = para.n_features
-        self.num_ff = para.future_frames
+        self.n_feats = para.n_features # RDB cell 输出隐藏层状态通道数
+        self.num_ff = para.future_frames 
         self.num_fb = para.past_frames
-        self.ds_ratio = 4
+        self.ds_ratio = 4 # 特征图相较原图缩放系数
         self.device = torch.device('cuda')
         self.cell = RDBCell(para)
         self.recons = Reconstructor(para)
@@ -199,15 +207,16 @@ class Model(nn.Module):
         s_height = int(height / self.ds_ratio)
         s_width = int(width / self.ds_ratio)
         # forward h structure: (batch_size, channel, height, width)
+        # 一开始隐藏层状态是s
         s = torch.zeros(batch_size, self.n_feats, s_height, s_width).to(self.device)
         for i in range(frames):
             h, s = self.cell(x[:, i, :, :, :], s)
-            hs.append(h)
-        for i in range(self.num_fb, frames - self.num_ff):
+            hs.append(h) # hs:[(b,c,h,w), ..., (b,c,h,w)]
+        for i in range(self.num_fb, frames - self.num_ff): # 如果frames=6，则这里循环2次
             out = self.fusion(hs[i - self.num_fb:i + self.num_ff + 1])
             out = self.recons(out)
             outputs.append(out.unsqueeze(dim=1))
-        return torch.cat(outputs, dim=1)
+        return torch.cat(outputs, dim=1) # (b,frames,c,h,w) -> (b,frames-2,c,h,w)
 
     # For calculating GMACs
     def profile_forward(self, x):
