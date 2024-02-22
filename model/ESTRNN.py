@@ -37,7 +37,7 @@ class RDB(nn.Module):
         out += x
         return out
 
-
+# RDB cell 中中间的部分单独抽出来
 # Middle network of residual dense blocks
 class RDNet(nn.Module):
     def __init__(self, in_channels, growthRate, num_layer, num_blocks, activation='relu'):
