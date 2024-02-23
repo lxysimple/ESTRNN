@@ -22,7 +22,7 @@ class DeblurDataset(Dataset):
     def __init__(self, path, frames, future_frames, past_frames, crop_size=(256, 256), data_format='RGB',
                  centralize=True, normalize=True):
         assert frames - future_frames - past_frames >= 1
-        self.frames = frames # 子序列总帧数，默认是5
+        self.frames = frames # 子序列总帧数，默认是10
         self.num_ff = future_frames
         self.num_pf = past_frames
         self.data_format = data_format
@@ -74,7 +74,9 @@ class DeblurDataset(Dataset):
             blur_img, sharp_img = self._load_sample(sample_dict, sample)
             blur_imgs.append(blur_img)
             sharp_imgs.append(sharp_img)
+        # 子序列中可去模糊的帧数
         sharp_imgs = sharp_imgs[self.num_pf:self.frames - self.num_ff]
+        # [(2, c, h, w), ...] 
         return [torch.cat(item, dim=0) for item in [blur_imgs, sharp_imgs]]
 
     def _load_sample(self, sample_dict, sample):
