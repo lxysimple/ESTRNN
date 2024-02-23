@@ -61,7 +61,7 @@ class DeblurDataset(Dataset):
                 samples.append(seq_records[idx:idx + self.frames])
         return samples
 
-    def __getitem__(self, item):
+    def __getitem__(self, item): 
         top = random.randint(0, self.H - self.crop_h)
         left = random.randint(0, self.W - self.crop_w)
         flip_lr = random.randint(0, 1)
@@ -70,13 +70,13 @@ class DeblurDataset(Dataset):
         sample = {'top': top, 'left': left, 'flip_lr': flip_lr, 'flip_ud': flip_ud}
 
         blur_imgs, sharp_imgs = [], [] # 获得内存中数据增强、标准化后的子序列
-        for sample_dict in self._samples[item]:
+        for sample_dict in self._samples[item]: 
             blur_img, sharp_img = self._load_sample(sample_dict, sample)
             blur_imgs.append(blur_img)
             sharp_imgs.append(sharp_img)
         # 子序列中可去模糊的帧数
         sharp_imgs = sharp_imgs[self.num_pf:self.frames - self.num_ff]
-        # [(frames, c, h, w), (frames-some, c, h, w)] 
+        # [(frames=8, c, h, w), (frames-some=4, c, h, w)] 
         return [torch.cat(item, dim=0) for item in [blur_imgs, sharp_imgs]]
 
     def _load_sample(self, sample_dict, sample):

@@ -200,10 +200,12 @@ class Model(nn.Module):
         self.fusion = GSA(para)
 
     def forward(self, x, profile_flag=False):
+        print('x.shape: ', x.shape)
         if profile_flag:
             return self.profile_forward(x)
         outputs, hs = [], []
         batch_size, frames, channels, height, width = x.shape
+        
         s_height = int(height / self.ds_ratio)
         s_width = int(width / self.ds_ratio)
         # forward h structure: (batch_size, channel, height, width)

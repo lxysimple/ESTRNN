@@ -166,9 +166,9 @@ def dist_train(train_loader, model, criterion, metrics, opt, epoch, para, logger
    
             
         inputs = iter_samples[0]
-        print('inputs.shape: ', inputs.shape)
+        # print('inputs.shape: ', inputs.shape)
         labels = iter_samples[1]
-        print('labels.shape: ', labels.shape)
+        # print('labels.shape: ', labels.shape)
         outputs = model(iter_samples)
 
         # todo merge this part with model class
