@@ -25,7 +25,10 @@ class Parameter:
 
         # data parameters
         self.parser.add_argument('--data_root', type=str, default='/home/zhong/Dataset/', help='the path of dataset')
-        self.parser.add_argument('--dataset', type=str, default='BSD', help='BSD, gopro_ds_lmdb, reds_lmdb')
+
+        # self.parser.add_argument('--dataset', type=str, default='BSD', help='BSD, gopro_ds_lmdb, reds_lmdb')
+        self.parser.add_argument('--dataset', type=str, default='', help='BSD, gopro_ds_lmdb, reds_lmdb')
+
         self.parser.add_argument('--save_dir', type=str, default='./experiment/',
                                  help='directory to save logs of experiments')
         self.parser.add_argument('--frames', type=int, default=8, help='# of frames of subsequence')
