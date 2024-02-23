@@ -43,7 +43,9 @@ def ssim_calculate(x, y, val_range=255.0):
     # ssim = compare_ssim(y, x, multichannel=True, gaussian_weights=True, sigma=1.5, use_sample_covariance=False,
     #                     data_range=val_range)
 
-    ssim = compare_ssim(y, x, channel_axis=2, gaussian_weights=True, sigma=1.5, use_sample_covariance=False,
+    # 指定的是数组里面通道数的axis
+    # 对三通道数组进行计算SSIM时，例如数组维度为(H, W, C)，此时指定channel_axis=-1即可
+    ssim = compare_ssim(y, x, channel_axis=-1, gaussian_weights=True, sigma=1.5, use_sample_covariance=False,
                     data_range=val_range)
     return ssim
 
