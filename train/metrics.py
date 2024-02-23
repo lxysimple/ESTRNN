@@ -30,8 +30,8 @@ def psnr_calculate(x, y, val_range=255.0):
 
     # x = x.astype(np.float)
     # y = y.astype(np.float)
-    x = float(x)
-    y = float(y)
+    x = x.astype(float)
+    y = y.astype(float)
 
     diff = (x - y) / val_range
     mse = np.mean(diff ** 2)
