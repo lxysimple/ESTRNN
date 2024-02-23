@@ -124,6 +124,7 @@ class Dataloader:
                 drop_last=True
             )
             loader_len = np.ceil(ds_len / gpus)
+            # 保证数据集是batchsize的整数倍
             self.loader_len = int(np.ceil(loader_len / bs) * bs)
 
         elif para.trainer_mode == 'dp':
