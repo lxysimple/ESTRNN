@@ -36,6 +36,9 @@ class DeblurDataset(Dataset):
         self._samples = self._generate_samples(path, data_format)
 
     def _generate_samples(self, dataset_path, data_format):
+        """
+        将一个序列中100组帧变成[[1=(Blur,Sharp),2,3,4,5], [2,3,4,5,6], ...]子序列形式
+        """
         samples = list()
         records = dict()
         seqs = sorted(os.listdir(dataset_path), key=int)
@@ -46,11 +49,13 @@ class DeblurDataset(Dataset):
                 sample = dict()
                 sample['Blur'] = join(dataset_path, seq, 'Blur', data_format, '{:08d}.{}'.format(frame, suffix))
                 sample['Sharp'] = join(dataset_path, seq, 'Sharp', data_format, '{:08d}.{}'.format(frame, suffix))
+                # records[seq1]=[sample1, sample2, ...]
                 records[seq].append(sample)
-        for seq_records in records.values():
+        for seq_records in records.values(): # seq_records is a list
             temp_length = len(seq_records) - (self.frames - 1)
             if temp_length <= 0:
                 raise IndexError('Exceed the maximum length of the video sequence')
+            # 有很多重叠的帧
             for idx in range(temp_length):
                 samples.append(seq_records[idx:idx + self.frames])
         return samples
