@@ -109,6 +109,7 @@ class Dataloader:
         bs = para.batch_size
         ds_len = len(dataset)
         if para.trainer_mode == 'ddp':
+            # 它适用于使用多个 GPU 进行训练的情况，可以确保每个 GPU 都能够获取到不同的样本。
             sampler = torch.utils.data.distributed.DistributedSampler(
                 dataset,
                 num_replicas=para.num_gpus,
