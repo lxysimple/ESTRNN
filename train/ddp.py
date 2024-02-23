@@ -224,18 +224,30 @@ def dist_valid(valid_loader, model, criterion, metrics, epoch, para, logger):
     model.eval()
 
     with torch.no_grad():
-        if logger:
-            losses_meter = {}
-            _, losses_name = loss_parse(para.loss)
-            losses_name.append('all')
-            for key in losses_name:
-                losses_meter[key] = AverageMeter()
+        # if logger:
+        #     losses_meter = {}
+        #     _, losses_name = loss_parse(para.loss)
+        #     losses_name.append('all')
+        #     for key in losses_name:
+        #         losses_meter[key] = AverageMeter()
 
-            measure_meter = AverageMeter()
-            batchtime_meter = AverageMeter()
-            start = time.time()
-            end = time.time()
-            pbar = tqdm(total=len(valid_loader) * para.num_gpus, ncols=80)
+        #     measure_meter = AverageMeter()
+        #     batchtime_meter = AverageMeter()
+        #     start = time.time()
+        #     end = time.time()
+        #     pbar = tqdm(total=len(valid_loader) * para.num_gpus, ncols=80)
+
+        losses_meter = {}
+        _, losses_name = loss_parse(para.loss)
+        losses_name.append('all')
+        for key in losses_name:
+            losses_meter[key] = AverageMeter()
+
+        measure_meter = AverageMeter()
+        batchtime_meter = AverageMeter()
+        start = time.time()
+        end = time.time()
+        pbar = tqdm(total=len(valid_loader) * para.num_gpus, ncols=80)
 
         for iter_samples in valid_loader:
             for (key, val) in enumerate(iter_samples):
