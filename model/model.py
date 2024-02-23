@@ -8,6 +8,7 @@ class Model(nn.Module):
         super(Model, self).__init__()
         self.para = para
         model_name = para.model
+        # 我感觉应该是寻找当前文件夹下model_name这个文件，并从该文件Model类中的forward开始运行
         self.module = import_module('model.{}'.format(model_name))
         self.model = self.module.Model(para)
 
