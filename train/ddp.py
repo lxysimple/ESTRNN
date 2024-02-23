@@ -1,3 +1,7 @@
+"""
+该文件将在不同的GPU上各执行一次
+"""
+
 import os
 import random
 import time
