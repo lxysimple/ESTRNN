@@ -76,7 +76,7 @@ class DeblurDataset(Dataset):
             sharp_imgs.append(sharp_img)
         # 子序列中可去模糊的帧数
         sharp_imgs = sharp_imgs[self.num_pf:self.frames - self.num_ff]
-        # [(2, c, h, w), ...] 
+        # [(frames, c, h, w), (frames-some, c, h, w)] 
         return [torch.cat(item, dim=0) for item in [blur_imgs, sharp_imgs]]
 
     def _load_sample(self, sample_dict, sample):
