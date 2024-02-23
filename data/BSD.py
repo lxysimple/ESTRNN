@@ -78,6 +78,7 @@ class DeblurDataset(Dataset):
         return [torch.cat(item, dim=0) for item in [blur_imgs, sharp_imgs]]
 
     def _load_sample(self, sample_dict, sample):
+        """ 载入内存，做一点数据增强和标准化 """
         if self.data_format == 'RGB':
             sample['image'] = cv2.imread(sample_dict['Blur'])
             sample['label'] = cv2.imread(sample_dict['Sharp'])
