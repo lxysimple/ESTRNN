@@ -27,8 +27,12 @@ def psnr_calculate(x, y, val_range=255.0):
     # x,y size (h,w,c)
     # assert len(x.shape) == 3
     # assert len(y.shape) == 3
-    x = x.astype(np.float)
-    y = y.astype(np.float)
+
+    # x = x.astype(np.float)
+    # y = y.astype(np.float)
+    x = float(x)
+    y = float(y)
+
     diff = (x - y) / val_range
     mse = np.mean(diff ** 2)
     psnr = -10 * np.log10(mse)
