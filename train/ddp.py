@@ -160,6 +160,7 @@ def dist_train(train_loader, model, criterion, metrics, opt, epoch, para, logger
     pbar = tqdm(total=len(train_loader) * para.num_gpus, ncols=80)
 
     for iter_samples in train_loader: # iter_samples=(b, f, c, h, w)
+        print('iter_samples.shape', iter_samples.shape)
         for (key, val) in enumerate(iter_samples):
             iter_samples[key] = val.cuda()
    
