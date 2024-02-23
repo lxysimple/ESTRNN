@@ -162,11 +162,10 @@ def dist_train(train_loader, model, criterion, metrics, opt, epoch, para, logger
     for iter_samples in train_loader: # iter_samples=(b, f, c, h, w)
         for (key, val) in enumerate(iter_samples):
             iter_samples[key] = val.cuda()
-
-        print(leiter_samples)
    
             
         inputs = iter_samples[0]
+        print('inputs.shape: ', inputs.shape)
         labels = iter_samples[1]
         outputs = model(iter_samples)
 
