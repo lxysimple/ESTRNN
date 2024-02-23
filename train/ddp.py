@@ -129,18 +129,31 @@ def dist_train(train_loader, model, criterion, metrics, opt, epoch, para, logger
     if logger:
         logger('[Epoch {} / lr {:.2e}]'.format(epoch, opt.get_lr()), prefix='\n')
 
-        losses_meter = {}
-        _, losses_name = loss_parse(para.loss)
-        losses_name.append('all')
-        for key in losses_name:
-            losses_meter[key] = AverageMeter()
+        # losses_meter = {}
+        # _, losses_name = loss_parse(para.loss)
+        # losses_name.append('all')
+        # for key in losses_name:
+        #     losses_meter[key] = AverageMeter()
 
-        measure_meter = AverageMeter()
-        batchtime_meter = AverageMeter()
+        # measure_meter = AverageMeter()
+        # batchtime_meter = AverageMeter()
 
-        start = time.time()
-        end = time.time()
-        pbar = tqdm(total=len(train_loader) * para.num_gpus, ncols=80)
+        # start = time.time()
+        # end = time.time()
+        # pbar = tqdm(total=len(train_loader) * para.num_gpus, ncols=80)
+
+    losses_meter = {}
+    _, losses_name = loss_parse(para.loss)
+    losses_name.append('all')
+    for key in losses_name:
+        losses_meter[key] = AverageMeter()
+
+    measure_meter = AverageMeter()
+    batchtime_meter = AverageMeter()
+
+    start = time.time()
+    end = time.time()
+    pbar = tqdm(total=len(train_loader) * para.num_gpus, ncols=80)
 
     for iter_samples in train_loader:
         for (key, val) in enumerate(iter_samples):
