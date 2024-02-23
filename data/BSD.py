@@ -22,7 +22,7 @@ class DeblurDataset(Dataset):
     def __init__(self, path, frames, future_frames, past_frames, crop_size=(256, 256), data_format='RGB',
                  centralize=True, normalize=True):
         assert frames - future_frames - past_frames >= 1
-        self.frames = frames
+        self.frames = frames # 子序列总帧数，默认是5
         self.num_ff = future_frames
         self.num_pf = past_frames
         self.data_format = data_format
@@ -69,7 +69,7 @@ class DeblurDataset(Dataset):
         # 裁剪和翻转的相关参数
         sample = {'top': top, 'left': left, 'flip_lr': flip_lr, 'flip_ud': flip_ud}
 
-        blur_imgs, sharp_imgs = [], []
+        blur_imgs, sharp_imgs = [], [] # 获得内存中数据增强、标准化后的子序列
         for sample_dict in self._samples[item]:
             blur_img, sharp_img = self._load_sample(sample_dict, sample)
             blur_imgs.append(blur_img)
@@ -78,8 +78,8 @@ class DeblurDataset(Dataset):
         return [torch.cat(item, dim=0) for item in [blur_imgs, sharp_imgs]]
 
     def _load_sample(self, sample_dict, sample):
-        """ 载入内存，做一点数据增强和标准化 """
-        
+        """ 将1帧载入内存，做一点数据增强和标准化 """
+
         if self.data_format == 'RGB':
             sample['image'] = cv2.imread(sample_dict['Blur'])
             sample['label'] = cv2.imread(sample_dict['Sharp'])
