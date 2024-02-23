@@ -200,7 +200,7 @@ class Model(nn.Module):
         self.fusion = GSA(para)
 
     def forward(self, x, profile_flag=False):
-        print('x.shape: ', x.shape)
+        # print('x.shape: ', x.shape)
         if profile_flag:
             return self.profile_forward(x)
         outputs, hs = [], []
@@ -241,6 +241,8 @@ class Model(nn.Module):
 
 
 def feed(model, iter_samples):
+    """ 传进来一个列表，取出列表中第1个张量做input """
+    
     inputs = iter_samples[0]
     outputs = model(inputs)
     return outputs
