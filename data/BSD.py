@@ -38,6 +38,7 @@ class DeblurDataset(Dataset):
     def _generate_samples(self, dataset_path, data_format):
         """
         将一个序列中100组帧变成[[1=(Blur,Sharp),2,3,4,5], [2,3,4,5,6], ...]子序列形式
+        返回多个改变的序列
         """
         samples = list()
         records = dict()
