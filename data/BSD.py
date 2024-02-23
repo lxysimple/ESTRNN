@@ -37,7 +37,7 @@ class DeblurDataset(Dataset):
 
     def _generate_samples(self, dataset_path, data_format):
         """
-        将一个序列中100组帧变成[[1=(Blur,Sharp),2,3,4,5], [2,3,4,5,6], ...]子序列形式
+        将一个序列中100组帧变成[[1=(Blur_path,Sharp_path),2,3,4,5], [2,3,4,5,6], ...]子序列形式
         返回多个序列中所有子序列混合列表
         """
         samples = list()
@@ -66,6 +66,7 @@ class DeblurDataset(Dataset):
         left = random.randint(0, self.W - self.crop_w)
         flip_lr = random.randint(0, 1)
         flip_ud = random.randint(0, 1)
+        # 裁剪和翻转的相关参数
         sample = {'top': top, 'left': left, 'flip_lr': flip_lr, 'flip_ud': flip_ud}
 
         blur_imgs, sharp_imgs = [], []
