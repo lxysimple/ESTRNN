@@ -2,6 +2,11 @@ from para import Parameter
 from train import Trainer
 
 if __name__ == '__main__':
+
+    import os
+    os.environ['CUDA_LAUNCH_BLOCKING'] = '1' 
+
+
     para = Parameter().args
     # para.model = 'ESTRNN'
 
