@@ -112,7 +112,7 @@ def _test_300vw(para, logger, model, ds_type):
                 deblur_img = normalize_reverse(deblur_img, centralize=para.centralize, normalize=para.normalize,
                                                val_range=val_range)
                 deblur_img = deblur_img.detach().cpu().numpy().transpose((1, 2, 0)).squeeze()
-                deblur_img = np.clip(deblur_img, 0, val_range)
+                # deblur_img = np.clip(deblur_img, 0, val_range)
                 deblur_img = deblur_img.astype(np.uint8) if para.data_format == 'RGB' else deblur_img.astype(np.uint16)
                 # deblur_img_path = join(save_dir, '{:08d}_{}.{}'.format(frame_idx + start, para.model.lower(), suffix))
                 deblur_img_path = join(save_dir, '{}.{}'.format(frame_idx + start, suffix))
@@ -143,7 +143,7 @@ def _test_300vw(para, logger, model, ds_type):
             path = dirname(save_dir)
             frame_start = para.past_frames
             frame_end = seq_length - para.future_frames
-            img2video(path=path, size=(3 * W, 1 * H), seq=seq, frame_start=frame_start, frame_end=frame_end,
+            img2video_300vw(path=path, size=(3 * W, 1 * H), seq=seq, frame_start=frame_start, frame_end=frame_end,
                       marks=marks, fps=10)
 
     logger('Test images : {}'.format(PSNR.count), prefix='\n')

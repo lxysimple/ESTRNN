@@ -64,3 +64,23 @@ def img2video(path, size, seq, frame_start, frame_end, marks, fps=10):
         frame = np.concatenate(imgs, axis=1)
         video.write(frame)
     video.release()
+
+def img2video_300vw(path, size, seq, frame_start, frame_end, marks, fps=10):
+    """
+    generate video
+    """
+    file_path = join(path, '{}.avi'.format(seq))
+    os.makedirs(dirname(path), exist_ok=True)
+    path = join(path, '{}'.format(seq))
+    fourcc = cv2.VideoWriter_fourcc(*"MJPG")
+    video = cv2.VideoWriter(file_path, fourcc, fps, size)
+    for i in range(frame_start, frame_end):
+        imgs = []
+        for j in range(len(marks)):
+            img_path = join(path, '{}.jpg'.format(i))
+            img = cv2.imread(img_path)
+            img = cv2.putText(img, marks[j], (60, 60), cv2.FONT_HERSHEY_PLAIN, 2.0, (0, 0, 255), 2)
+            imgs.append(img)
+        frame = np.concatenate(imgs, axis=1)
+        video.write(frame)
+    video.release()
