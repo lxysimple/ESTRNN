@@ -93,8 +93,8 @@ def _test_300vw(para, logger, model, ds_type):
                 # input_seq = normalize(torch.from_numpy(input_seq).float().cuda(), centralize=para.centralize,
                 #                       normalize=para.normalize, val_range=val_range)
                 input_seq, min_, max_min_ = min_max_normalization(torch.from_numpy(input_seq).float().cuda())
-                print('min_.shape: ', min_.shape)
-                
+                # print('min_.shape: ', min_.shape)
+
                 time_start = time.time()
                 output_seq = model([input_seq, ])
                 if isinstance(output_seq, (list, tuple)):
@@ -113,12 +113,10 @@ def _test_300vw(para, logger, model, ds_type):
                 # gt_img = label_seq[frame_idx]
                 # gt_img_path = join(save_dir, '{:08d}_gt.{}'.format(frame_idx + start, suffix))
                 deblur_img = output_seq[frame_idx - para.past_frames]
-                min_img = min_[frame_idx - para.past_frames]
-                max_min_img = max_min_[frame_idx - para.past_frames]
 
                 # deblur_img = normalize_reverse(deblur_img, centralize=para.centralize, normalize=para.normalize,
                 #                                val_range=val_range)
-                deblur_img = min_max_normalization_reverse(deblur_img, min_img, max_min_img)
+                deblur_img = min_max_normalization_reverse(deblur_img, min_, max_min_)
 
                 deblur_img = deblur_img.detach().cpu().numpy().transpose((1, 2, 0)).squeeze()
                 deblur_img = np.clip(deblur_img, 0, val_range)
