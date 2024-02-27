@@ -141,10 +141,6 @@ def min_max_normalization_reverse(x, min_, max_min_):
     if x.ndim > 2:
         x = x.reshape(x.shape[0], -1)
 
-    # 如果最小值的平均值为0，最大值的平均值为1，说明已经是归一化状态，直接返回
-    if min_.mean() == 0 and max_.mean() == 1:
-        return x.reshape(shape)
-
     # 进行最小-最大归一化处理
     x = x*max_min_ + min_
 
