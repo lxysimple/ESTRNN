@@ -119,8 +119,10 @@ def min_max_normalization(x: torch.Tensor): # [1, 20, 3, 256, 256]
     max_ = x.max(dim=-1, keepdim=True)
     # print('min_[0]: ', min_[0][0]) # 先取value所在的张量，再取第1行
 
-    # 进行最小-最大归一化处理
-    x = (x - min_) / (max_ - min_ + 1e-9)
+    # 对3通道进行最小-最大归一化处理
+    x[0] = (x[0] - min_[0][0]) / (max_[0][0] - min_[0][0] + 1e-9)
+    x[1] = (x[1] - min_[0][1]) / (max_[0][1] - min_[0][1] + 1e-9)
+    x[2] = (x[2] - min_[0][2]) / (max_[0][2] - min_[0][2] + 1e-9)
 
     return x.reshape(shape), min_, max_-min_
 
