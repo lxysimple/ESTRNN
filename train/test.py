@@ -92,7 +92,6 @@ def _test_300vw(para, logger, model, ds_type):
             with torch.no_grad():
                 # input_seq = normalize(torch.from_numpy(input_seq).float().cuda(), centralize=para.centralize,
                 #                       normalize=para.normalize, val_range=val_range)
-
                 input_seq, min_, max_min_ = min_max_normalization(torch.from_numpy(input_seq).float().cuda())
                 
                 time_start = time.time()
