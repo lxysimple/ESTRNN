@@ -103,15 +103,9 @@ def normalize_reverse(x, centralize=False, normalize=False, val_range=255.0):
 
     return x
 
-def min_max_normalization(x: torch.Tensor): 
-    """最小-最大归一化函数
-
-    参数:
-    x (tc.Tensor): 输入张量，形状为(batch, f1, ...)
-
-    返回:
-    tc.Tensor: 归一化后的张量，保持原始形状
-    """
+def min_max_normalization(x: torch.Tensor): # [1, 20, 3, 256, 256]
+    
+    x = x[0][0] # [3, 256, 256]
     # 获取输入张量的形状
     shape = x.shape
 
@@ -120,12 +114,9 @@ def min_max_normalization(x: torch.Tensor):
         x = x.reshape(x.shape[0], -1)
 
     # 计算每行的最小值和最大值,只取第1行的值拿来用（故假设一个batchsize中图片都近似）
-    min_ = x.min(dim=-1, keepdim=True)[0]
-    max_ = x.max(dim=-1, keepdim=True)[0]
-
-    # 如果最小值的平均值为0，最大值的平均值为1，说明已经是归一化状态，直接返回
-    if min_.mean() == 0 and max_.mean() == 1:
-        return x.reshape(shape)
+    # 分别获得3通道的最大最小值
+    min_ = x.min(dim=-1, keepdim=True)
+    max_ = x.max(dim=-1, keepdim=True)
 
     # 进行最小-最大归一化处理
     x = (x - min_) / (max_ - min_ + 1e-9)
