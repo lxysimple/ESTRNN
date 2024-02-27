@@ -126,25 +126,25 @@ def _test_300vw(para, logger, model, ds_type):
                 #     PSNR.update(psnr_calculate(deblur_img, gt_img, val_range=val_range))
                 #     SSIM.update(ssim_calculate(deblur_img, gt_img, val_range=val_range))
 
-            # if end == seq_length:
-            #     break
-            # else:
-            #     start = end - para.future_frames - para.past_frames
-            #     end = start + para.test_frames
-            #     if end > seq_length:
-            #         end = seq_length
-            #         start = end - para.test_frames
+            if end == seq_length:
+                break
+            else:
+                start = end - para.future_frames - para.past_frames
+                end = start + para.test_frames
+                if end > seq_length:
+                    end = seq_length
+                    start = end - para.test_frames
 
-        if para.video:
-            if para.data_format != 'RGB':
-                continue
-            logger('seq {} video result generating ...'.format(seq))
-            marks = ['Input', para.model]
-            path = dirname(save_dir)
-            frame_start = para.past_frames
-            frame_end = seq_length - para.future_frames
-            img2video_300vw(path=path, size=(3 * W, 1 * H), seq=seq, frame_start=frame_start, frame_end=frame_end,
-                      marks=marks, fps=10)
+        # if para.video:
+        #     if para.data_format != 'RGB':
+        #         continue
+        #     logger('seq {} video result generating ...'.format(seq))
+        #     marks = ['Input', para.model]
+        #     path = dirname(save_dir)
+        #     frame_start = para.past_frames
+        #     frame_end = seq_length - para.future_frames
+        #     img2video_300vw(path=path, size=(3 * W, 1 * H), seq=seq, frame_start=frame_start, frame_end=frame_end,
+        #               marks=marks, fps=10)
 
     logger('Test images : {}'.format(PSNR.count), prefix='\n')
     # logger('Test PSNR : {}'.format(PSNR.avg))
