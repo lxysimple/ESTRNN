@@ -119,7 +119,7 @@ def min_max_normalization(x: torch.Tensor):
     if x.ndim > 2:
         x = x.reshape(x.shape[0], -1)
 
-    # 计算每行的最小值和最大值
+    # 计算每行的最小值和最大值,只取第1行的值拿来用
     min_ = x.min(dim=-1, keepdim=True)[0]
     max_ = x.max(dim=-1, keepdim=True)[0]
 
