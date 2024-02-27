@@ -104,7 +104,7 @@ def normalize_reverse(x, centralize=False, normalize=False, val_range=255.0):
     return x
 
 def min_max_normalization(x: torch.Tensor): # [1, 20, 3, 256, 256]
-    
+    x_copy = x
     x = x[0][0] # [3, 256, 256]
     # 获取输入张量的形状
     shape = x.shape
@@ -113,22 +113,24 @@ def min_max_normalization(x: torch.Tensor): # [1, 20, 3, 256, 256]
     if x.ndim > 2:
         x = x.reshape(x.shape[0], -1)
 
-    # 计算每行的最小值和最大值,只取第1行的值拿来用（故假设一个batchsize中图片都近似）
+    # 计算每行的最小值和最大值,结果是一个键值对，[0]就是取出值
     # 分别获得3通道的最大最小值
-    min_ = x.min(dim=-1, keepdim=True)
-    max_ = x.max(dim=-1, keepdim=True)
+    min_ = x.min(dim=-1, keepdim=True)[0]
+    max_ = x.max(dim=-1, keepdim=True)[0]
     # print('min_[0]: ', min_[0][0]) # 先取value所在的张量，再取第1行
 
     # 对3通道进行最小-最大归一化处理
-    x[0] = (x[0] - min_[0][0]) / (max_[0][0] - min_[0][0] + 1e-9)
-    x[1] = (x[1] - min_[0][1]) / (max_[0][1] - min_[0][1] + 1e-9)
-    x[2] = (x[2] - min_[0][2]) / (max_[0][2] - min_[0][2] + 1e-9)
+    x_copy[:, :, 0] = (x[:, :, 0] - min_[0]) / (max_[0] - min_[0] + 1e-9)
+    x_copy[:, :, 1] = (x[:, :, 1] - min_[1]) / (max_[1] - min_[1] + 1e-9)
+    x_copy[:, :, 2] = (x[:, :, 2] - min_[2]) / (max_[2] - min_[2] + 1e-9)
 
-    return x.reshape(shape), min_[0], max_[0]-min_[0]
+    return x_copy, min_[0], max_[0]-min_[0]
 
 def min_max_normalization_reverse(x, min_, max_min_): 
 
     # 进行最小-最大归一化处理
-    x = x*max_min_ + min_
+    x[:, :, 0] = x[:, :, 0]*max_min_[0] + min_[0]
+    x[:, :, 1] = x[:, :, 1]*max_min_[1] + min_[1]
+    x[:, :, 2] = x[:, :, 2]*max_min_[2] + min_[2]
 
     return x
