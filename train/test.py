@@ -90,6 +90,8 @@ def _test_300vw(para, logger, model, ds_type):
             input_seq = np.concatenate(input_seq)[np.newaxis, :]
             model.eval()
             with torch.no_grad():
+
+                print('torch.from_numpy(input_seq).shape: ', torch.from_numpy(input_seq).shape)
                 # input_seq = normalize(torch.from_numpy(input_seq).float().cuda(), centralize=para.centralize,
                 #                       normalize=para.normalize, val_range=val_range)
                 input_seq, min_, max_min_ = min_max_normalization(torch.from_numpy(input_seq).float().cuda())
