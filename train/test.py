@@ -100,11 +100,11 @@ def _test_300vw(para, logger, model, ds_type):
             
             # range(2, 20-0-2=18)
             for frame_idx in range(para.past_frames, end - start - para.future_frames):
-                blur_img = input_seq.squeeze(dim=0)[frame_idx]
-                blur_img = normalize_reverse(blur_img, centralize=para.centralize, normalize=para.normalize,
-                                             val_range=val_range)
-                blur_img = blur_img.detach().cpu().numpy().transpose((1, 2, 0)).squeeze()
-                blur_img = blur_img.astype(np.uint8) if para.data_format == 'RGB' else blur_img.astype(np.uint16)
+                # blur_img = input_seq.squeeze(dim=0)[frame_idx]
+                # blur_img = normalize_reverse(blur_img, centralize=para.centralize, normalize=para.normalize,
+                #                              val_range=val_range)
+                # blur_img = blur_img.detach().cpu().numpy().transpose((1, 2, 0)).squeeze()
+                # blur_img = blur_img.astype(np.uint8) if para.data_format == 'RGB' else blur_img.astype(np.uint16)
                 # blur_img_path = join(save_dir, '{:08d}_input.{}'.format(frame_idx + start, suffix))
                 # gt_img = label_seq[frame_idx]
                 # gt_img_path = join(save_dir, '{:08d}_gt.{}'.format(frame_idx + start, suffix))
@@ -126,20 +126,20 @@ def _test_300vw(para, logger, model, ds_type):
                 #     PSNR.update(psnr_calculate(deblur_img, gt_img, val_range=val_range))
                 #     SSIM.update(ssim_calculate(deblur_img, gt_img, val_range=val_range))
 
-            if end == seq_length:
-                break
-            else:
-                start = end - para.future_frames - para.past_frames
-                end = start + para.test_frames
-                if end > seq_length:
-                    end = seq_length
-                    start = end - para.test_frames
+            # if end == seq_length:
+            #     break
+            # else:
+            #     start = end - para.future_frames - para.past_frames
+            #     end = start + para.test_frames
+            #     if end > seq_length:
+            #         end = seq_length
+            #         start = end - para.test_frames
 
         if para.video:
             if para.data_format != 'RGB':
                 continue
             logger('seq {} video result generating ...'.format(seq))
-            marks = ['Input', para.model, 'GT']
+            marks = ['Input', para.model]
             path = dirname(save_dir)
             frame_start = para.past_frames
             frame_end = seq_length - para.future_frames
