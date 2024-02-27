@@ -12,7 +12,7 @@ import torch.nn as nn
 from data.utils import normalize, normalize_reverse
 from model import Model
 from .metrics import psnr_calculate, ssim_calculate
-from .utils import AverageMeter, img2video
+from .utils import AverageMeter, img2video, img2video_300vw
 
 
 def test(para, logger):
