@@ -134,14 +134,7 @@ def min_max_normalization(x: torch.Tensor):
 
 def min_max_normalization_reverse(x, min_, max_min_): 
 
-    # 获取输入张量的形状
-    shape = x.shape
-
-    # 如果输入张量的维度大于2，将其展平成二维张量
-    if x.ndim > 2:
-        x = x.reshape(x.shape[0], -1)
-
     # 进行最小-最大归一化处理
     x = x*max_min_ + min_
 
-    return x.reshape(shape)
+    return x
