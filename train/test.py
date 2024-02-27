@@ -112,7 +112,7 @@ def _test_300vw(para, logger, model, ds_type):
                 deblur_img = normalize_reverse(deblur_img, centralize=para.centralize, normalize=para.normalize,
                                                val_range=val_range)
                 deblur_img = deblur_img.detach().cpu().numpy().transpose((1, 2, 0)).squeeze()
-                # deblur_img = np.clip(deblur_img, 0, val_range)
+                deblur_img = np.clip(deblur_img, 0, val_range)
                 deblur_img = deblur_img.astype(np.uint8) if para.data_format == 'RGB' else deblur_img.astype(np.uint16)
                 # deblur_img_path = join(save_dir, '{:08d}_{}.{}'.format(frame_idx + start, para.model.lower(), suffix))
                 deblur_img_path = join(save_dir, '{}.{}'.format(frame_idx + start, suffix))
