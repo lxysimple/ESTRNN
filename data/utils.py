@@ -124,7 +124,7 @@ def min_max_normalization(x: torch.Tensor): # [1, 20, 3, 256, 256]
     x_copy[:, :, 1] = (x_copy[:, :, 1] - min_[1]) / (max_[1] - min_[1] + 1e-9)
     x_copy[:, :, 2] = (x_copy[:, :, 2] - min_[2]) / (max_[2] - min_[2] + 1e-9)
 
-    return x_copy, min_[0], max_[0]-min_[0]
+    return x_copy, min_, max_-min_
 
 def min_max_normalization_reverse(x, min_, max_min_): # [3, 256, 256]
 

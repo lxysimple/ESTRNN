@@ -118,7 +118,9 @@ def _test_300vw(para, logger, model, ds_type):
 
                 # deblur_img = normalize_reverse(deblur_img, centralize=para.centralize, normalize=para.normalize,
                 #                                val_range=val_range)
-                print('deblur_img.shape', deblur_img.shape)
+
+                # [3, 256, 256]
+                # print('deblur_img.shape', deblur_img.shape)
                 deblur_img = min_max_normalization_reverse(deblur_img, min_, max_min_)
 
                 deblur_img = deblur_img.detach().cpu().numpy().transpose((1, 2, 0)).squeeze()
