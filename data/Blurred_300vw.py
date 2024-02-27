@@ -93,7 +93,7 @@ class DeblurDataset(Dataset):
             
         # [(frames=8, c, h, w), (frames-some=4, c, h, w)] 
         # return [torch.cat(item, dim=0) for item in [blur_imgs, sharp_imgs]]
-        return [torch.cat(item, dim=0) for item in [blur_imgs]]
+        return torch.cat(blur_imgs, dim=0) 
 
     def _load_sample(self, sample_dict, sample):
         """ 将1帧载入内存，做一点数据增强和标准化 """
