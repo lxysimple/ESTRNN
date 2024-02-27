@@ -117,7 +117,7 @@ def min_max_normalization(x: torch.Tensor): # [1, 20, 3, 256, 256]
     # 分别获得3通道的最大最小值
     min_ = x.min(dim=-1, keepdim=True)
     max_ = x.max(dim=-1, keepdim=True)
-    print('min_[0]: ', min_[0][0])
+    # print('min_[0]: ', min_[0][0]) # 先取value所在的张量，再取第1行
 
     # 进行最小-最大归一化处理
     x = (x - min_) / (max_ - min_ + 1e-9)
