@@ -48,6 +48,8 @@ class DeblurDataset(Dataset):
             for frame in range(self._seq_length):
                 suffix = 'png' if data_format == 'RGB' else 'tiff'
                 sample = dict()
+
+                # 自定义数据要满足形式：dataset_path/002/Blur/png/00000002.png
                 sample['Blur'] = join(dataset_path, seq, 'Blur', data_format, '{:08d}.{}'.format(frame, suffix))
                 sample['Sharp'] = join(dataset_path, seq, 'Sharp', data_format, '{:08d}.{}'.format(frame, suffix))
                 # records[seq1]=[sample1, sample2, ...]
