@@ -45,7 +45,8 @@ class DeblurDataset(Dataset):
         seqs = sorted(os.listdir(dataset_path), key=int)
         for seq in seqs:
             records[seq] = list()
-            for frame in range(self._seq_length):
+            # for frame in range(self._seq_length):
+            for frame in range(2, self._seq_length+2): # 下标从2开始
                 suffix = 'png' if data_format == 'RGB' else 'tiff'
                 sample = dict()
 
