@@ -111,7 +111,7 @@ def dist_process(gpu, para):
     # training and validation
     for epoch in range(para.start_epoch, para.end_epoch + 1):
         dist_train(train_loader, model, criterion, metrics, opt, epoch, para, logger)
-        # dist_valid(valid_loader, model, criterion, metrics, epoch, para, logger)
+        dist_valid(valid_loader, model, criterion, metrics, epoch, para, logger)
 
         # save checkpoint
         if logger:
