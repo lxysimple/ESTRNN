@@ -56,10 +56,11 @@ def _test_300vw(para, logger, model, ds_type):
     seqs = sorted(os.listdir(dataset_path))
     # seq_length = 100
     # seq_length = 150
-    for seq in seqs:
+    # for seq in seqs:
+    for seq in ['546']:
 
         # seq_path = join(dataset_path, seq)
-        seq_path = join(dataset_path, seq, 'Blur' ,'RGB')
+        seq_path = join(dataset_path, seq, 'Blur')
         # seq_len = len(os.listdir(seq_path))
         seq_len = 100+7 # 只变清晰100帧
         seq_length = seq_len
