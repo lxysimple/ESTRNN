@@ -75,7 +75,8 @@ def _test_300vw(para, logger, model, ds_type):
             label_seq = []
 
 
-            
+            print('start: ',start)
+            print('end: ',end)
             for frame_idx in range(start, end):
                 # # 1.png
                 # blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, suffix))
