@@ -150,7 +150,7 @@ def _test_300vw(para, logger, model, ds_type):
                 #     PSNR.update(psnr_calculate(deblur_img, gt_img, val_range=val_range))
                 #     SSIM.update(ssim_calculate(deblur_img, gt_img, val_range=val_range))
 
-            if end >= seq_length:
+            if end == seq_length:
                 break
             else:
                 start = end - para.future_frames - para.past_frames
