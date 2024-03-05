@@ -81,6 +81,8 @@ def _test_300vw(para, logger, model, ds_type):
 
                 # sharp_img_path = join(dataset_path, seq, 'Sharp', para.data_format,
                 #                       '{:08d}.{}'.format(frame_idx, suffix))
+
+                
                 if para.data_format == 'RGB':
                     blur_img = cv2.imread(blur_img_path).transpose(2, 0, 1)[np.newaxis, ...]
                     # gt_img = cv2.imread(sharp_img_path)
