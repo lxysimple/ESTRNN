@@ -136,7 +136,7 @@ def _test_300vw(para, logger, model, ds_type):
                 deblur_img = np.clip(deblur_img, 0, val_range)
                 deblur_img = deblur_img.astype(np.uint8) if para.data_format == 'RGB' else deblur_img.astype(np.uint16)
                 # deblur_img_path = join(save_dir, '{:08d}_{}.{}'.format(frame_idx + start, para.model.lower(), suffix))
-                deblur_img_path = join(save_dir, '{}.{}'.format(frame_idx + start, suffix))
+                deblur_img_path = join(save_dir, '{:08d}.{}'.format(frame_idx + start, suffix))
                 
                 # cv2.imwrite(blur_img_path, blur_img)
                 # cv2.imwrite(gt_img_path, gt_img)
