@@ -95,6 +95,7 @@ def _test_300vw(para, logger, model, ds_type):
 
                 input_seq.append(blur_img)
                 # label_seq.append(gt_img)
+            # 创建一个新的维度
             input_seq = np.concatenate(input_seq)[np.newaxis, :]
             model.eval()
             with torch.no_grad():
