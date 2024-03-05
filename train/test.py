@@ -61,7 +61,7 @@ def _test_300vw(para, logger, model, ds_type):
         # seq_path = join(dataset_path, seq)
         seq_path = join(dataset_path, seq, 'Blur' ,'RGB')
         # seq_len = len(os.listdir(seq_path))
-        seq_len = 100-2 # 只变清晰100帧
+        seq_len = 100+7 # 只变清晰100帧
         seq_length = seq_len
 
         logger('seq {} image results generating ...'.format(seq))
