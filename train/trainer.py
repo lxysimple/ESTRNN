@@ -35,5 +35,6 @@ class Trainer(object):
             elif self.para.trainer_mode == 'dp':
                 process(self.para)
 
-        # test
-        test(self.para, logger)
+        # 暂时放弃test
+        # # test
+        # test(self.para, logger)
