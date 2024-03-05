@@ -73,7 +73,12 @@ def _test_300vw(para, logger, model, ds_type):
             input_seq = []
             label_seq = []
             for frame_idx in range(start, end):
-                blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, suffix))
+                # # 1.png
+                # blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, suffix))
+
+                # 00000001.png
+                blur_img_path = join(dataset_path, seq, '{:08d}.{}'.format(frame_idx, suffix))
+
                 # sharp_img_path = join(dataset_path, seq, 'Sharp', para.data_format,
                 #                       '{:08d}.{}'.format(frame_idx, suffix))
                 if para.data_format == 'RGB':
