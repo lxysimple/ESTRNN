@@ -68,8 +68,8 @@ def _test_300vw(para, logger, model, ds_type):
         os.makedirs(save_dir, exist_ok=True)
         # suffix = 'jpg' if para.data_format == 'RGB' else 'tiff'
         suffix = 'png' if para.data_format == 'RGB' else 'tiff'
-        start = 0 
-        end = para.test_frames # 20，相当于推理时的batchsize吧
+        start = 0 + 2 
+        end = para.test_frames + 2 # 20+2，相当于推理时的batchsize吧
         while True:
             input_seq = []
             label_seq = []
@@ -78,7 +78,7 @@ def _test_300vw(para, logger, model, ds_type):
                 # blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, suffix))
 
                 # 00000002.png 序号从2开始
-                blur_img_path = join(dataset_path, seq, 'Blur', 'RGB' ,'{:08d}.{}'.format(frame_idx+2, suffix))
+                blur_img_path = join(dataset_path, seq, 'Blur', 'RGB' ,'{:08d}.{}'.format(frame_idx, suffix))
 
                 # sharp_img_path = join(dataset_path, seq, 'Sharp', para.data_format,
                 #                       '{:08d}.{}'.format(frame_idx, suffix))
