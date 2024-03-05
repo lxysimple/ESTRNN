@@ -66,7 +66,8 @@ def _test_300vw(para, logger, model, ds_type):
         dir_name = '_'.join((para.dataset, para.model, 'test'))
         save_dir = join(para.test_save_dir, dir_name, seq)
         os.makedirs(save_dir, exist_ok=True)
-        suffix = 'jpg' if para.data_format == 'RGB' else 'tiff'
+        # suffix = 'jpg' if para.data_format == 'RGB' else 'tiff'
+        suffix = 'png' if para.data_format == 'RGB' else 'tiff'
         start = 0 
         end = para.test_frames # 20，相当于推理时的batchsize吧
         while True:
