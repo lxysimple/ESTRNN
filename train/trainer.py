@@ -36,5 +36,5 @@ class Trainer(object):
                 process(self.para)
 
         # 暂时放弃test
-        # # test
-        # test(self.para, logger)
+        # test
+        test(self.para, logger)
