@@ -78,7 +78,7 @@ def _test_300vw(para, logger, model, ds_type):
                 # blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, suffix))
 
                 # 00000002.png 序号从2开始
-                blur_img_path = join(dataset_path, seq, '{:08d}.{}'.format(frame_idx+2, suffix))
+                blur_img_path = join(dataset_path, seq, 'Blur', '{:08d}.{}'.format(frame_idx+2, suffix))
 
                 # sharp_img_path = join(dataset_path, seq, 'Sharp', para.data_format,
                 #                       '{:08d}.{}'.format(frame_idx, suffix))
