@@ -58,7 +58,8 @@ def _test_300vw(para, logger, model, ds_type):
     # seq_length = 150
     for seq in seqs:
 
-        seq_path = join(dataset_path, seq)
+        # seq_path = join(dataset_path, seq)
+        seq_path = join(dataset_path, 'Blur' ,'RBG' ,seq)
         seq_len = len(os.listdir(seq_path))
         seq_length = seq_len
 
