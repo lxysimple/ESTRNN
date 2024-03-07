@@ -71,7 +71,7 @@ def _test_300vw(para, logger, model, ds_type):
 
         # dir_name = '_'.join((para.dataset, para.model, 'test'))
         # save_dir = join(para.test_save_dir, dir_name, seq)
-        save_dir = '/home/xyli/data/test'
+        save_dir = '/home/xyli/data/resize_pic'
 
 
         os.makedirs(save_dir, exist_ok=True)
