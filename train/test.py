@@ -60,9 +60,9 @@ def _test_300vw(para, logger, model, ds_type):
     for seq in ['546']:
 
         # seq_path = join(dataset_path, seq)
-        seq_path = join(dataset_path, seq, 'Blur')
-        # seq_len = len(os.listdir(seq_path))
-        seq_len = 100+7 # 只变清晰100帧
+        seq_path = '/home/xyli/data/dest_blur/004/resize_pic' 
+        seq_len = len(os.listdir(seq_path))
+        # seq_len = 100+7 # 只变清晰100帧
         seq_length = seq_len
 
         logger('seq {} image results generating ...'.format(seq))
@@ -85,7 +85,7 @@ def _test_300vw(para, logger, model, ds_type):
                 # blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, suffix))
 
                 # 00000002.png 序号从2开始
-                blur_img_path = join(dataset_path, seq, 'Blur','{:08d}.{}'.format(frame_idx+2, suffix))
+                blur_img_path = join(dataset_path, seq, 'Blur','{:08d}.{}'.format(frame_idx+3, suffix))
 
                 # sharp_img_path = join(dataset_path, seq, 'Sharp', para.data_format,
                 #                       '{:08d}.{}'.format(frame_idx, suffix))
