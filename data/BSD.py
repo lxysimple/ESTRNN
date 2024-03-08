@@ -40,7 +40,7 @@ class DeblurDataset(Dataset):
             self._seq_length = 10 # 1500
 
             print('dataset_path: ', path)
-            seqs = ['003']
+            seqs = ['001', '002', '003']
 
         else:
             self._seq_length = 800 # 800
