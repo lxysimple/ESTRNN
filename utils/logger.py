@@ -86,7 +86,7 @@ class Logger():
         torch.save(state, path)
 
         # 不要bset_model了
-        # if self.is_best(state['epoch']):
-        #     copy_path = join(self.save_dir, 'model_best.pth.tar')
-        #     shutil.copy(path, copy_path)
+        if self.is_best(state['epoch']):
+            copy_path = join(self.save_dir, 'model_best.pth.tar')
+            shutil.copy(path, copy_path)
 
