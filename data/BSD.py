@@ -52,7 +52,9 @@ class DeblurDataset(Dataset):
         records = dict()
         seqs = sorted(os.listdir(dataset_path), key=int)
 
-        print('seqs: ', seqs)
+        # print('seqs: ', seqs)
+        seqs = ['001', '002']
+
         for seq in seqs:
             records[seq] = list()
             # for frame in range(self._seq_length):
