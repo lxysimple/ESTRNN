@@ -92,16 +92,17 @@ def dist_process(gpu, para):
     valid_loader = data.dataloader_valid
 
     # resume from a checkpoint
+    # 只加载模型，其他epoch、optimizer、scheduler重新开始
     if para.resume:
         if os.path.isfile(para.resume_file):
             checkpoint = torch.load(para.resume_file, map_location=lambda storage, loc: storage.cuda(rank))
             if logger:
                 logger('loading checkpoint {} ...'.format(para.resume_file))
                 logger.register_dict = checkpoint['register_dict']
-            para.start_epoch = checkpoint['epoch'] + 1
+            # para.start_epoch = checkpoint['epoch'] + 1
             model.load_state_dict(checkpoint['state_dict'])
-            opt.optimizer.load_state_dict(checkpoint['optimizer'])
-            opt.scheduler.load_state_dict(checkpoint['scheduler'])
+            # opt.optimizer.load_state_dict(checkpoint['optimizer'])
+            # opt.scheduler.load_state_dict(checkpoint['scheduler'])
         else:
             msg = 'no check point found at {}'.format(para.resume_file)
             if logger:
