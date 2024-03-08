@@ -114,7 +114,7 @@ class Dataloader:
         path = join(para.data_root, para.dataset, '{}_{}'.format(para.dataset, para.ds_config), ds_type)
         frames = para.frames
         dataset = DeblurDataset(path, frames, para.future_frames, para.past_frames, para.patch_size, para.data_format,
-                                para.centralize, para.normalize)
+                                para.centralize, para.normalize, ds_type=ds_type)
         gpus = para.num_gpus
         bs = para.batch_size
         ds_len = len(dataset)
@@ -132,8 +132,7 @@ class Dataloader:
                 num_workers=para.threads,
                 pin_memory=True,
                 sampler=sampler,
-                drop_last=True,
-                ds_type=ds_type
+                drop_last=True
             )
             loader_len = np.ceil(ds_len / gpus)
             # 保证数据集是batchsize的整数倍
