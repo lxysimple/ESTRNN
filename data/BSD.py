@@ -26,8 +26,8 @@ class DeblurDataset(Dataset):
         self.num_ff = future_frames
         self.num_pf = past_frames
         self.data_format = data_format
-        self.W = 1280 # 640
-        self.H = 720 # 480
+        self.W = 256 # 640
+        self.H = 256 # 480
         self.crop_h, self.crop_w = crop_size
         self.normalize = normalize
         self.centralize = centralize
