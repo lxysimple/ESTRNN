@@ -36,7 +36,7 @@ class DeblurDataset(Dataset):
 
         self.ds_type = ds_type 
         
-        if ds_type == 'ds_type':
+        if ds_type == 'train':
             self._seq_length = 1500 # 1500
         else:
             self._seq_length = 800 # 800
