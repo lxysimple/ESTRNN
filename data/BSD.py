@@ -35,7 +35,7 @@ class DeblurDataset(Dataset):
         self.transform = transforms.Compose([Flip(), ToTensor()])
         
         if ds_type == 'ds_type':
-            self._seq_length = 1500 # 100
+            self._seq_length = 500 # 100
         else:
             self._seq_length = 800 # 100
 
