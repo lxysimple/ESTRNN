@@ -26,6 +26,8 @@ class Trainer(object):
             if self.para.trainer_mode == 'ddp':
                 gpus = self.para.num_gpus
                 processes = []
+
+                # 开6个进程，分别使用6张不同的显卡
                 for rank in range(gpus):
                     p = mp.Process(target=dist_process, args=(rank, self.para))
                     p.start()

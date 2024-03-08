@@ -158,6 +158,8 @@ def dist_train(train_loader, model, criterion, metrics, opt, epoch, para, logger
 
     start = time.time()
     end = time.time()
+
+    # 宽度被设置为80个字符
     pbar = tqdm(total=len(train_loader) * para.num_gpus, ncols=80)
 
     for iter_samples in train_loader: # iter_samples=(b, f, c, h, w)
