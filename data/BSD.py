@@ -33,7 +33,7 @@ class DeblurDataset(Dataset):
         self.centralize = centralize
         # self.transform = transforms.Compose([Crop(crop_size), Flip(), ToTensor()])
         self.transform = transforms.Compose([Flip(), ToTensor()])
-        self._seq_length = 1200 # 100
+        self._seq_length = 1500 # 100
         self._samples = self._generate_samples(path, data_format)
 
     def _generate_samples(self, dataset_path, data_format):
