@@ -53,7 +53,7 @@ class DeblurDataset(Dataset):
         seqs = sorted(os.listdir(dataset_path), key=int)
 
         # print('seqs: ', seqs)
-        seqs = ['001', '002', '003']
+        seqs = ['001', '002', '007']
 
         for seq in seqs:
             records[seq] = list()
