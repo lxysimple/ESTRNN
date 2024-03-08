@@ -46,7 +46,7 @@ class DeblurDataset(Dataset):
             self._seq_length = 800 # 800
 
             print('dataset_path: ', path)
-            seqs = ['003']
+            seqs = ['004']
 
         self._samples = self._generate_samples(path, data_format)
 
