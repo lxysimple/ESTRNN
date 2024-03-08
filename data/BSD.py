@@ -33,6 +33,8 @@ class DeblurDataset(Dataset):
         self.centralize = centralize
         # self.transform = transforms.Compose([Crop(crop_size), Flip(), ToTensor()])
         self.transform = transforms.Compose([Flip(), ToTensor()])
+
+        self.ds_type = ds_type 
         
         if ds_type == 'ds_type':
             self._seq_length = 1500 # 1500
