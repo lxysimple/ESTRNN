@@ -32,7 +32,7 @@ class DeblurDataset(Dataset):
         self.normalize = normalize
         self.centralize = centralize
         # self.transform = transforms.Compose([Crop(crop_size), Flip(), ToTensor()])
-        self.transform = transforms.Compose([Flip(), ToTensor()])
+        self.transform = transforms.Compose([ ToTensor()])
 
         self.ds_type = ds_type 
         
