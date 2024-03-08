@@ -20,7 +20,7 @@ class DeblurDataset(Dataset):
     """
 
     def __init__(self, path, frames, future_frames, past_frames, crop_size=(256, 256), data_format='RGB',
-                 centralize=True, normalize=True):
+                 centralize=True, normalize=True, ds_type='train'):
         assert frames - future_frames - past_frames >= 1
         self.frames = frames # 子序列总帧数，默认是10
         self.num_ff = future_frames
@@ -33,7 +33,12 @@ class DeblurDataset(Dataset):
         self.centralize = centralize
         # self.transform = transforms.Compose([Crop(crop_size), Flip(), ToTensor()])
         self.transform = transforms.Compose([Flip(), ToTensor()])
-        self._seq_length = 1500 # 100
+        
+        if ds_type == 'ds_type':
+            self._seq_length = 1500 # 100
+        else:
+            self._seq_length = 800 # 100
+
         self._samples = self._generate_samples(path, data_format)
 
     def _generate_samples(self, dataset_path, data_format):
@@ -127,7 +132,8 @@ class Dataloader:
                 num_workers=para.threads,
                 pin_memory=True,
                 sampler=sampler,
-                drop_last=True
+                drop_last=True,
+                ds_type=ds_type
             )
             loader_len = np.ceil(ds_len / gpus)
             # 保证数据集是batchsize的整数倍
