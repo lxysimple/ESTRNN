@@ -38,8 +38,15 @@ class DeblurDataset(Dataset):
         
         if ds_type == 'train':
             self._seq_length = 10 # 1500
+
+            print('dataset_path: ', dataset_path)
+            seqs = ['003']
+
         else:
             self._seq_length = 800 # 800
+
+            print('dataset_path: ', dataset_path)
+            seqs = ['003']
 
         self._samples = self._generate_samples(path, data_format)
 
@@ -52,8 +59,7 @@ class DeblurDataset(Dataset):
         records = dict()
         seqs = sorted(os.listdir(dataset_path), key=int)
 
-        print('dataset_path: ', dataset_path)
-        seqs = ['003']
+        
 
         for seq in seqs:
             records[seq] = list()
