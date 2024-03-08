@@ -51,6 +51,8 @@ class DeblurDataset(Dataset):
         samples = list()
         records = dict()
         seqs = sorted(os.listdir(dataset_path), key=int)
+
+        print('seqs: ', seqs)
         for seq in seqs:
             records[seq] = list()
             # for frame in range(self._seq_length):
@@ -58,7 +60,7 @@ class DeblurDataset(Dataset):
                 suffix = 'png' if data_format == 'RGB' else 'tiff'
                 sample = dict()
 
-                # 自定义数据要满足形式：dataset_path/002/Blur/png/00000002.png
+                # 自定义数据要满足形式：dataset_path/002/Blur/RGB/00000002.png
                 # dataset:/home/xyli/data/BSD/BSD_2ms16ms/train/
                 sample['Blur'] = join(dataset_path, seq, 'Blur', data_format, '{:08d}.{}'.format(frame, suffix))
                 sample['Sharp'] = join(dataset_path, seq, 'Sharp', data_format, '{:08d}.{}'.format(frame, suffix))
