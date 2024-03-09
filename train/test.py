@@ -53,13 +53,13 @@ def _test_300vw(para, logger, model, ds_type):
     H, W = 256, 256
     val_range = 2.0 ** 8 - 1 if para.data_format == 'RGB' else 2.0 ** 16 - 1
     # dataset_path = para.data_root
-    dataset_path = '/home/xyli/data/Blurred-300VW'
+    dataset_path = '/home/xyli/data/dest'
 
-    seqs = sorted(os.listdir(dataset_path))
+    # seqs = sorted(os.listdir(dataset_path))
     # seq_length = 100
     # seq_length = 150
-    for seq in seqs:
-    # for seq in ['546']:
+    # for seq in seqs:
+    for seq in ['004']:
 
         seq_path = join(dataset_path, seq)
         # seq_path = dataset_path 
@@ -70,7 +70,7 @@ def _test_300vw(para, logger, model, ds_type):
         logger('seq {} image results generating ...'.format(seq))
 
         # dir_name = '_'.join((para.dataset, para.model, 'test'))
-        save_dir = join('/home/xyli/data/Blurred-300VW-deblur', seq)
+        save_dir = join('/home/xyli/data/004_deblur', seq)
         # save_dir = '/home/xyli/data/Blurred-300VW-deblur'
 
 
@@ -88,7 +88,7 @@ def _test_300vw(para, logger, model, ds_type):
             print('end: ',end)
             for frame_idx in range(start, end):
                 # # 1.png
-                blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, 'jpg'))
+                blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, 'png'))
 
                 # 00000002.png 序号从2开始
                 # blur_img_path = join(dataset_path, '{:08d}.{}'.format(frame_idx+2, suffix))
