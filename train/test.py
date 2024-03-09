@@ -70,8 +70,8 @@ def _test_300vw(para, logger, model, ds_type):
         logger('seq {} image results generating ...'.format(seq))
 
         # dir_name = '_'.join((para.dataset, para.model, 'test'))
-        # save_dir = join('/home/xyli/data/004_deblur', seq)
-        save_dir = '/home/xyli/data/Blurred-300VW-deblur'
+        save_dir = join('/home/xyli/data/Blurred-300VW-deblur', seq)
+        # save_dir = '/home/xyli/data/Blurred-300VW-deblur'
 
 
         os.makedirs(save_dir, exist_ok=True)
@@ -150,7 +150,7 @@ def _test_300vw(para, logger, model, ds_type):
                 
                 # 为什么加1，因为ESTRNN输出总是比原输入少2帧，一个少在开头，一个少在末尾
                 # 所以输出的第i帧对应原帧第i+1帧
-                deblur_img_path = join(save_dir, seq, '{}.{}'.format(frame_idx + start, suffix))
+                deblur_img_path = join(save_dir, '{}.{}'.format(frame_idx + start, suffix))
                 
                 # cv2.imwrite(blur_img_path, blur_img)
                 # cv2.imwrite(gt_img_path, gt_img)
