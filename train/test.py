@@ -55,7 +55,7 @@ def _test_300vw(para, logger, model, ds_type):
     # dataset_path = para.data_root
     dataset_path = '/home/xyli/data/Blurred-300VW'
 
-    # seqs = sorted(os.listdir(dataset_path))
+    seqs = sorted(os.listdir(dataset_path))
     # seq_length = 100
     # seq_length = 150
     for seq in seqs:
