@@ -53,25 +53,25 @@ def _test_300vw(para, logger, model, ds_type):
     H, W = 256, 256
     val_range = 2.0 ** 8 - 1 if para.data_format == 'RGB' else 2.0 ** 16 - 1
     # dataset_path = para.data_root
-    dataset_path = '/home/xyli/data/dest'
+    dataset_path = '/home/xyli/data/Blurred-300VW'
 
     # seqs = sorted(os.listdir(dataset_path))
     # seq_length = 100
     # seq_length = 150
-    # for seq in seqs:
-    for seq in ['004']:
+    for seq in seqs:
+    # for seq in ['004']:
 
-        seq_path = join(dataset_path, seq, 'resize_pic_0.053715')
+        seq_path = join(dataset_path, seq)
         # seq_path = dataset_path 
-        # seq_len = len(os.listdir(seq_path))
-        seq_len = 800 # 只变清晰100帧
+        seq_len = len(os.listdir(seq_path))
+        # seq_len = 800 # 只变清晰100帧
         seq_length = seq_len
 
         logger('seq {} image results generating ...'.format(seq))
 
         # dir_name = '_'.join((para.dataset, para.model, 'test'))
-        save_dir = join('/home/xyli/data/004_deblur', seq)
-        # save_dir = '/home/xyli/data/Blurred-300VW-deblur'
+        # save_dir = join('/home/xyli/data/004_deblur', seq)
+        save_dir = '/home/xyli/data/Blurred-300VW-deblur'
 
 
         os.makedirs(save_dir, exist_ok=True)
@@ -90,8 +90,9 @@ def _test_300vw(para, logger, model, ds_type):
                 # # 1.png
                 # blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, 'png'))
 
-                # 00000002.png 序号从2开始
-                blur_img_path = join(seq_path, '{:08d}.{}'.format(frame_idx+2, suffix))
+                # 为什么加1，因为ESTRNN输出总是比原输入少2帧，一个少在开头，一个少在末尾
+                # 所以输出的第i帧对应原帧第i+1帧
+                blur_img_path = join(seq_path, '{:08d}.{}'.format(frame_idx+1, suffix))
 
                 # sharp_img_path = join(dataset_path, seq, 'Sharp', para.data_format,
                 #                       '{:08d}.{}'.format(frame_idx, suffix))
