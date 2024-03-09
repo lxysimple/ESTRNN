@@ -58,8 +58,8 @@ def _test_300vw(para, logger, model, ds_type):
     # seqs = sorted(os.listdir(dataset_path))
     # seq_length = 100
     # seq_length = 150
-    # for seq in seqs:
-    for seq in ['004']:
+    for seq in seqs:
+    # for seq in ['004']:
 
         seq_path = join(dataset_path, seq)
         # seq_path = dataset_path 
@@ -150,7 +150,7 @@ def _test_300vw(para, logger, model, ds_type):
                 
                 # 为什么加1，因为ESTRNN输出总是比原输入少2帧，一个少在开头，一个少在末尾
                 # 所以输出的第i帧对应原帧第i+1帧
-                deblur_img_path = join(save_dir, '{:08d}.{}'.format(frame_idx + start, suffix))
+                deblur_img_path = join(save_dir, seq, '{}.{}'.format(frame_idx + start, suffix))
                 
                 # cv2.imwrite(blur_img_path, blur_img)
                 # cv2.imwrite(gt_img_path, gt_img)
