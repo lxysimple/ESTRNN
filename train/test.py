@@ -61,7 +61,7 @@ def _test_300vw(para, logger, model, ds_type):
     # for seq in seqs:
     for seq in ['004']:
 
-        seq_path = join(dataset_path, seq)
+        seq_path = join(dataset_path, seq, 'resize_pic_0.053715')
         # seq_path = dataset_path 
         # seq_len = len(os.listdir(seq_path))
         seq_len = 800 # 只变清晰100帧
@@ -88,10 +88,10 @@ def _test_300vw(para, logger, model, ds_type):
             print('end: ',end)
             for frame_idx in range(start, end):
                 # # 1.png
-                blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, 'png'))
+                # blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, 'png'))
 
                 # 00000002.png 序号从2开始
-                # blur_img_path = join(dataset_path, '{:08d}.{}'.format(frame_idx+2, suffix))
+                blur_img_path = join(dataset_path, '{:08d}.{}'.format(frame_idx+2, suffix))
 
                 # sharp_img_path = join(dataset_path, seq, 'Sharp', para.data_format,
                 #                       '{:08d}.{}'.format(frame_idx, suffix))
