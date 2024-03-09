@@ -58,8 +58,8 @@ def _test_300vw(para, logger, model, ds_type):
     # seqs = sorted(os.listdir(dataset_path))
     # seq_length = 100
     # seq_length = 150
-    for seq in seqs:
-    # for seq in ['004']:
+    # for seq in seqs:
+    for seq in ['004']:
 
         seq_path = join(dataset_path, seq)
         # seq_path = dataset_path 
@@ -87,12 +87,9 @@ def _test_300vw(para, logger, model, ds_type):
             print('start: ',start)
             print('end: ',end)
             for frame_idx in range(start, end):
-                # # 1.png
-                # blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, 'png'))
-
-                # 为什么加1，因为ESTRNN输出总是比原输入少2帧，一个少在开头，一个少在末尾
-                # 所以输出的第i帧对应原帧第i+1帧
-                blur_img_path = join(seq_path, '{:08d}.{}'.format(frame_idx+1, suffix))
+        
+                blur_img_path = join(dataset_path, seq, '{}.{}'.format(frame_idx, 'jpg'))
+                # blur_img_path = join(seq_path, '{:08d}.{}'.format(frame_idx+1, suffix))
 
                 # sharp_img_path = join(dataset_path, seq, 'Sharp', para.data_format,
                 #                       '{:08d}.{}'.format(frame_idx, suffix))
@@ -150,7 +147,10 @@ def _test_300vw(para, logger, model, ds_type):
                 deblur_img = np.clip(deblur_img, 0, val_range)
                 deblur_img = deblur_img.astype(np.uint8) if para.data_format == 'RGB' else deblur_img.astype(np.uint16)
                 # deblur_img_path = join(save_dir, '{:08d}_{}.{}'.format(frame_idx + start, para.model.lower(), suffix))
-                deblur_img_path = join(save_dir, '{:08d}.{}'.format(frame_idx + start + 2, suffix))
+                
+                # 为什么加1，因为ESTRNN输出总是比原输入少2帧，一个少在开头，一个少在末尾
+                # 所以输出的第i帧对应原帧第i+1帧
+                deblur_img_path = join(save_dir, '{:08d}.{}'.format(frame_idx + start, suffix))
                 
                 # cv2.imwrite(blur_img_path, blur_img)
                 # cv2.imwrite(gt_img_path, gt_img)
