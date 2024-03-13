@@ -49,9 +49,6 @@ class DeblurDataset(Dataset):
         """
         将一个序列中100组帧变成[[1=(Blur_path,Sharp_path),2,3,4,5], [2,3,4,5,6], ...]子序列形式
         返回多个序列中所有子序列混合列表
-
-        args:
-            dataset_path: == para.dataset, /home/xyli/data
         """
         samples = list()
         records = dict()
@@ -59,21 +56,17 @@ class DeblurDataset(Dataset):
 
         
 
-        for seq in seqs: # seq = '001', ...
+        for seq in seqs:
             records[seq] = list()
             # for frame in range(self._seq_length):
             for frame in range(2, self._seq_length+2): # 下标从2开始
-                
+                suffix = 'png' if data_format == 'RGB' else 'tiff'
                 sample = dict()
+
                 # 自定义数据要满足形式：dataset_path/002/Blur/RGB/00000002.png
                 # dataset:/home/xyli/data/BSD/BSD_2ms16ms/train/
-                # sample['Blur'] = join(dataset_path, seq, 'Blur', data_format, '{:08d}.{}'.format(frame, suffix))
-                # sample['Sharp'] = join(dataset_path, seq, 'Sharp', data_format, '{:08d}.{}'.format(frame, suffix))
-
-                sample['Blur'] = join(dataset_path, '300vw_resize256', seq, '{:08d}.png'.format(frame))
-                sample['Sharp'] = join(dataset_path, '300vw_resize256_blur', seq, '{:08d}.png'.format(frame))
-
-                
+                sample['Blur'] = join(dataset_path, seq, 'Blur', data_format, '{:08d}.{}'.format(frame, suffix))
+                sample['Sharp'] = join(dataset_path, seq, 'Sharp', data_format, '{:08d}.{}'.format(frame, suffix))
                 # records[seq1]=[sample1, sample2, ...]
                 records[seq].append(sample)
         for seq_records in records.values(): # seq_records is a list
