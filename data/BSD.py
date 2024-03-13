@@ -65,10 +65,10 @@ class DeblurDataset(Dataset):
             records[seq] = list()
 
             # 动态的值
-            self._seq_length = len(os.listdir(join(dataset_path, '300vw_resize256', seq)))
+            seq_length = len(os.listdir(join(dataset_path, '300vw_resize256', seq)))
 
             # for frame in range(self._seq_length):
-            for frame in range(2, self._seq_length+2): # 下标从2开始
+            for frame in range(2, seq_length+2): # 下标从2开始
                 
                 sample = dict()
                 # 自定义数据要满足形式：dataset_path/002/Blur/RGB/00000002.png
