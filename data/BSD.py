@@ -40,9 +40,9 @@ class DeblurDataset(Dataset):
             self.data_dir = '300vw_resize256'
             self.blur_data_dir = '300vw_resize256_blur'
 
-        else:
-            D = '300vw_resize256'
-            self.blur_data_dir = '300vw_resize256_blur'
+        if ds_type == 'valid':
+            self.data_dir = '300vw_resize256_valid'
+            self.blur_data_dir = '300vw_resize256_blur_valid'
 
 
         self._samples = self._generate_samples(path, data_format)
