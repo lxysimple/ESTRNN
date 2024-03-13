@@ -36,11 +36,13 @@ class DeblurDataset(Dataset):
 
         self.ds_type = ds_type 
         
-        if ds_type == 'train':
-            self._seq_length = 1500 # 1500
+        # if ds_type == 'train':
+        #     self._seq_length = 1500 # 1500
 
-        else:
-            self._seq_length = 800 # 800
+        # else:
+        #     self._seq_length = 800 # 800
+
+        self._seq_length = 0 
 
 
         self._samples = self._generate_samples(path, data_format)
@@ -61,6 +63,10 @@ class DeblurDataset(Dataset):
 
         for seq in seqs: # seq = '001', ...
             records[seq] = list()
+
+            # 动态的值
+            self._seq_length = len(os.listdir(join(dataset_path, '300vw_resize256', seq)))
+
             # for frame in range(self._seq_length):
             for frame in range(2, self._seq_length+2): # 下标从2开始
                 
