@@ -36,11 +36,13 @@ class DeblurDataset(Dataset):
 
         self.ds_type = ds_type 
         
-        # if ds_type == 'train':
-        #     self._seq_length = 1500 # 1500
+        if ds_type == 'train':
+            self.data_dir = '300vw_resize256'
+            self.blur_data_dir = '300vw_resize256_blur'
 
-        # else:
-        #     self._seq_length = 800 # 800
+        else:
+            D = '300vw_resize256'
+            self.blur_data_dir = '300vw_resize256_blur'
 
 
         self._samples = self._generate_samples(path, data_format)
@@ -63,7 +65,7 @@ class DeblurDataset(Dataset):
             records[seq] = list()
 
             # 动态的值
-            seq_length = len(os.listdir(join(dataset_path, '300vw_resize256', seq)))
+            seq_length = len(os.listdir(join(dataset_path, self.data_dir, seq)))
 
             # for frame in range(self._seq_length):
             for frame in range(2, seq_length+2): # 下标从2开始
@@ -74,8 +76,8 @@ class DeblurDataset(Dataset):
                 # sample['Blur'] = join(dataset_path, seq, 'Blur', data_format, '{:08d}.{}'.format(frame, suffix))
                 # sample['Sharp'] = join(dataset_path, seq, 'Sharp', data_format, '{:08d}.{}'.format(frame, suffix))
 
-                sample['Blur'] = join(dataset_path, '300vw_resize256', seq, '{:08d}.png'.format(frame))
-                sample['Sharp'] = join(dataset_path, '300vw_resize256_blur', seq, '{:08d}.png'.format(frame))
+                sample['Blur'] = join(dataset_path, self.blur_data_dir, seq, '{:08d}.png'.format(frame))
+                sample['Sharp'] = join(dataset_path, self.data_dir, seq, '{:08d}.png'.format(frame))
 
                 
                 # records[seq1]=[sample1, sample2, ...]
