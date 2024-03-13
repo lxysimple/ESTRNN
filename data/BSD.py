@@ -42,8 +42,6 @@ class DeblurDataset(Dataset):
         # else:
         #     self._seq_length = 800 # 800
 
-        self._seq_length = 0 
-
 
         self._samples = self._generate_samples(path, data_format)
 
