@@ -51,7 +51,7 @@ class DeblurDataset(Dataset):
         返回多个序列中所有子序列混合列表
 
         args:
-            dataset_path: == para.dataset, /home/xyli/data
+            dataset_path: == para.data_root, /home/xyli/data
         """
         samples = list()
         records = dict()
@@ -125,7 +125,7 @@ class DeblurDataset(Dataset):
 
 class Dataloader:
     def __init__(self, para, device_id, ds_type='train'):
-        path = join(para.data_root, para.dataset, '{}_{}'.format(para.dataset, para.ds_config), ds_type)
+        path = para.data_root
         frames = para.frames
         dataset = DeblurDataset(path, frames, para.future_frames, para.past_frames, para.patch_size, para.data_format,
                                 para.centralize, para.normalize, ds_type=ds_type)
