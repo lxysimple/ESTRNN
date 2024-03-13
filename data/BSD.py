@@ -37,9 +37,11 @@ class DeblurDataset(Dataset):
         self.ds_type = ds_type 
         
         if ds_type == 'train':
-            self.data_dir = '300vw_resize256'
-            self.blur_data_dir = '300vw_resize256_blur'
-
+            # self.data_dir = '300vw_resize256'
+            # self.blur_data_dir = '300vw_resize256_blur'
+            self.data_dir = '300vw_resize256_valid'
+            self.blur_data_dir = '300vw_resize256_blur_valid'
+            
         if ds_type == 'valid':
             self.data_dir = '300vw_resize256_valid'
             self.blur_data_dir = '300vw_resize256_blur_valid'
