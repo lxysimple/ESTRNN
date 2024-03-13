@@ -37,11 +37,11 @@ class DeblurDataset(Dataset):
         self.ds_type = ds_type 
         
         if ds_type == 'train':
-            # self.data_dir = '300vw_resize256'
-            # self.blur_data_dir = '300vw_resize256_blur'
-            self.data_dir = '300vw_resize256_valid'
-            self.blur_data_dir = '300vw_resize256_blur_valid'
-            
+            self.data_dir = '300vw_resize256'
+            self.blur_data_dir = '300vw_resize256_blur'
+            # self.data_dir = '300vw_resize256_valid'
+            # self.blur_data_dir = '300vw_resize256_blur_valid'
+
         if ds_type == 'valid':
             self.data_dir = '300vw_resize256_valid'
             self.blur_data_dir = '300vw_resize256_blur_valid'
@@ -67,7 +67,8 @@ class DeblurDataset(Dataset):
             records[seq] = list()
 
             # 动态的值, 选blur_data_dir是因为模糊数据集帧数总是少2个(最开始的帧和最末尾的帧)
-            seq_length = len(os.listdir(join(dataset_path, self.blur_data_dir, seq)))
+            # seq_length = len(os.listdir(join(dataset_path, self.blur_data_dir, seq)))
+            seq_length = 100
 
             # for frame in range(self._seq_length):
             for frame in range(2, seq_length+2): # 下标从2开始
