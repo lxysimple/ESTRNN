@@ -57,7 +57,7 @@ class DeblurDataset(Dataset):
         """
         samples = list()
         records = dict()
-        seqs = sorted(os.listdir(dataset_path), key=int)
+        seqs = sorted(os.listdir(join(dataset_path,self.blur_data_dir)), key=int) 
 
         
 
