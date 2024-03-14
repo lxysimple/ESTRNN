@@ -92,7 +92,9 @@ def _test_300vw(para, logger, model, ds_type):
         os.makedirs(save_dir, exist_ok=True)
         # suffix = 'jpg' if para.data_format == 'RGB' else 'tiff'
         suffix = 'png' if para.data_format == 'RGB' else 'tiff'
-        start = 0  
+
+        # 不同数据集的初始值不一样
+        start = 1  
         end = para.test_frames # 20+2，相当于推理时的batchsize吧
         while True:
             input_seq = []
