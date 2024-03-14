@@ -93,7 +93,7 @@ def _test_300vw(para, logger, model, ds_type):
         # suffix = 'jpg' if para.data_format == 'RGB' else 'tiff'
         suffix = 'png' if para.data_format == 'RGB' else 'tiff'
 
-        # 不同数据集的初始值不一样
+        # 不同数据集的初始值不一样,即有的是0.jpg,有的是00000001.png
         start = 1  
         end = para.test_frames # 20+2，相当于推理时的batchsize吧
         while True:
