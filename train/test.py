@@ -76,7 +76,8 @@ def _test_300vw(para, logger, model, ds_type):
     for seq in seqs:
     # for seq in ['004']:
 
-        seq_path = join(dataset_path, seq)
+        # seq_path = join(dataset_path, seq)
+        seq_path = join(dataset_path, seq, 'images')
         # seq_path = dataset_path 
         seq_len = len(os.listdir(seq_path))
         # seq_len = 800 # 只变清晰100帧
