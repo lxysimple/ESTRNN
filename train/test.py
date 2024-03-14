@@ -166,8 +166,6 @@ def _test_300vw(para, logger, model, ds_type):
                 deblur_img = deblur_img.astype(np.uint8) if para.data_format == 'RGB' else deblur_img.astype(np.uint16)
                 # deblur_img_path = join(save_dir, '{:08d}_{}.{}'.format(frame_idx + start, para.model.lower(), suffix))
                 
-                # 为什么加1，因为ESTRNN输出总是比原输入少2帧，一个少在开头，一个少在末尾
-                # 所以输出的第i帧对应原帧第i+1帧
                 deblur_img_path = join(save_dir, '{:08d}.{}'.format(frame_idx + start, suffix))
                 
                 # cv2.imwrite(blur_img_path, blur_img)
