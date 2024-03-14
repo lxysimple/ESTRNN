@@ -85,7 +85,7 @@ def _test_300vw(para, logger, model, ds_type):
         logger('seq {} image results generating ...'.format(seq))
 
         # dir_name = '_'.join((para.dataset, para.model, 'test'))
-        save_dir = join('/home/xyli/data/300VW-improved', seq)
+        save_dir = join('/home/xyli/data/300vw-improved', seq)
         # save_dir = '/home/xyli/data/Blurred-300VW-deblur'
 
 
