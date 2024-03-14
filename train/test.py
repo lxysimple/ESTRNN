@@ -16,6 +16,19 @@ from .utils import AverageMeter, img2video, img2video_300vw
 
 from data.utils import min_max_normalization, min_max_normalization_reverse
 
+# Category 1 in laboratory and naturalistic well-lit conditions
+videos_test_1 = ['114', '124', '125', '126', '150', '158', '401', '402', '505', '506',
+                        '507', '508', '509', '510', '511', '514', '515', '518', '519', '520', 
+                        '521', '522', '524', '525', '537', '538', '540', '541', '546', '547', 
+                        '548']
+# Category 2 in real-world human-computer interaction applications
+videos_test_2 = ['203', '208', '211', '212', '213', '214', '218', '224', '403', '404', 
+                        '405', '406', '407', '408', '409', '412', '550', '551', '553']
+
+# Category 3 in arbitrary conditions
+videos_test_3 = ['410', '411', '516', '517', '526', '528', '529', '530', '531', '533', 
+                        '557', '558', '559', '562']
+
 def test(para, logger):
     """
     test code
@@ -55,8 +68,7 @@ def _test_300vw(para, logger, model, ds_type):
     # dataset_path = para.data_root
     dataset_path = '/home/xyli/data/Blurred-300VW'
     
-    seqs = ['410', '411', '516', '517', '526', '528', '529', '530', '531', '533', 
-                              '557', '558', '559', '562']
+    seqs = videos_test_2 + videos_test_1
     # seqs = sorted(os.listdir(dataset_path))
     # seq_length = 100
     # seq_length = 150
