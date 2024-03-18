@@ -38,10 +38,12 @@ class DeblurDataset(Dataset):
         
         # 在这里自定义数据集路径
         if ds_type == 'train':
-            self.data_dir = '300vw_fix256'
-            self.blur_data_dir = ''
-            # self.data_dir = '300vw_resize256_valid'
-            # self.blur_data_dir = '300vw_resize256_blur_valid'
+
+            # self.data_dir = '300vw_fix256'
+            # self.blur_data_dir = ''
+
+            self.data_dir = '300vw_fix256_test3'
+            self.blur_data_dir = '300vw_fix256_myblur_test3'
 
         if ds_type == 'valid':
             self.data_dir = '300vw_fix256_test3'
