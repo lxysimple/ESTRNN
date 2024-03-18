@@ -36,15 +36,16 @@ class DeblurDataset(Dataset):
 
         self.ds_type = ds_type 
         
+        # 在这里自定义数据集路径
         if ds_type == 'train':
-            self.data_dir = '300vw_resize256'
-            self.blur_data_dir = '300vw_resize256_blur'
+            self.data_dir = '300vw_fix256'
+            self.blur_data_dir = ''
             # self.data_dir = '300vw_resize256_valid'
             # self.blur_data_dir = '300vw_resize256_blur_valid'
 
         if ds_type == 'valid':
-            self.data_dir = '300vw_resize256_valid'
-            self.blur_data_dir = '300vw_resize256_blur_valid'
+            self.data_dir = '300vw_fix256_test3'
+            self.blur_data_dir = '300vw_fix256_myblur_test3'
 
 
         self._samples = self._generate_samples(path, data_format)
@@ -59,7 +60,7 @@ class DeblurDataset(Dataset):
         """
         samples = list()
         records = dict()
-        seqs = sorted(os.listdir(join(dataset_path,self.blur_data_dir)), key=int) 
+        seqs = sorted(os.listdir(join(dataset_path, self.blur_data_dir)), key=int) 
 
         
 
