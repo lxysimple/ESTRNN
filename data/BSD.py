@@ -42,8 +42,8 @@ class DeblurDataset(Dataset):
             # self.data_dir = '300vw_fix256'
             # self.blur_data_dir = ''
 
-            self.data_dir = '300vw_fix256_test3'
-            self.blur_data_dir = '300vw_fix256_myblur_test3'
+            self.data_dir = '300vw_fix256'
+            self.blur_data_dir = '300vw_fix256_myblur'
 
         if ds_type == 'valid':
             self.data_dir = '300vw_fix256_test3'
