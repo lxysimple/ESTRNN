@@ -98,7 +98,7 @@ def dist_process(gpu, para):
             checkpoint = torch.load(para.resume_file, map_location=lambda storage, loc: storage.cuda(rank))
             if logger:
                 logger('loading checkpoint {} ...'.format(para.resume_file))
-                logger.register_dict = checkpoint['register_dict']
+                # logger.register_dict = checkpoint['register_dict']
             # para.start_epoch = checkpoint['epoch'] + 1
             model.load_state_dict(checkpoint['state_dict'])
             # opt.optimizer.load_state_dict(checkpoint['optimizer'])
