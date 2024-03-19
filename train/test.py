@@ -107,9 +107,8 @@ def _test_300vw(para, logger, model, ds_type):
             for frame_idx in range(start, end):
         
                 # 当更换路径时，记得改一下这里
-                # blur_img_path = join(dataset_path, seq, '{:08d}.{}'.format(frame_idx, 'png'))
-                # 下标从2开始
-                blur_img_path = join(seq_path, '{:08d}.{}'.format(frame_idx, suffix))
+                blur_img_path = join(dataset_path, '{:08d}.{}'.format(frame_idx, 'png'))
+                # blur_img_path = join(seq_path, '{:08d}.{}'.format(frame_idx, suffix))
 
                 # sharp_img_path = join(dataset_path, seq, 'Sharp', para.data_format,
                 #                       '{:08d}.{}'.format(frame_idx, suffix))
