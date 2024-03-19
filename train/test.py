@@ -69,7 +69,7 @@ def _test_300vw(para, logger, model, ds_type):
     # dataset_path = '/home/xyli/data/Blurred-300VW'
     dataset_path = '/home/xyli/data/300vw_fix256_myblur_test2'
     
-    seqs = videos_test_3
+    seqs = videos_test_2
     # seqs = sorted(os.listdir(dataset_path))
     # seq_length = 100
     # seq_length = 150
