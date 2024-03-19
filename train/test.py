@@ -67,7 +67,7 @@ def _test_300vw(para, logger, model, ds_type):
     val_range = 2.0 ** 8 - 1 if para.data_format == 'RGB' else 2.0 ** 16 - 1
     # dataset_path = para.data_root
     # dataset_path = '/home/xyli/data/Blurred-300VW'
-    dataset_path = '/home/xyli/data/300vw_fix256_myblur_test2'
+    dataset_path = '/home/xyli/data/300vw_fix256_myblur_test1'
     
     seqs = videos_test_2
     # seqs = sorted(os.listdir(dataset_path))
@@ -86,7 +86,7 @@ def _test_300vw(para, logger, model, ds_type):
         logger('seq {} image results generating ...'.format(seq))
 
         # dir_name = '_'.join((para.dataset, para.model, 'test')) 
-        save_dir = join('/home/xyli/data/300vw_fix256_myblur_test2_deblur', seq ) 
+        save_dir = join('/home/xyli/data/300vw_fix256_myblur_test1_deblur', seq ) 
         # save_dir = '/home/xyli/data/300vw_fix256_myblur_test3_deblur'
 
 
