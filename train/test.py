@@ -67,7 +67,7 @@ def _test_300vw(para, logger, model, ds_type):
     val_range = 2.0 ** 8 - 1 if para.data_format == 'RGB' else 2.0 ** 16 - 1
     # dataset_path = para.data_root
     # dataset_path = '/home/xyli/data/Blurred-300VW'
-    dataset_path = '/home/xyli/data/300vw_fix256_myblur_test3'
+    dataset_path = '/home/xyli/data/300vw_fix256_test3'
     
     seqs = videos_test_3
     # seqs = sorted(os.listdir(dataset_path))
